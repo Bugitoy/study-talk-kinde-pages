@@ -292,4 +292,5 @@ export const pageSettings = {
   bindings: {
     "kinde.auth.google": "{{kinde.auth.google}}"
   }
-}; 
+}; / /   U p d a t e d   f o r   d e p l o y m e n t  
+ 
