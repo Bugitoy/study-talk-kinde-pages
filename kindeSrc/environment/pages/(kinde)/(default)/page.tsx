@@ -37,8 +37,16 @@ interface PageProps {
 
 export default function Page({ event }: PageProps) {
   const { context, request } = event;
-  const { content } = context.widget;
-  const { flow } = request.route;
+  
+  // Add null checks to prevent TypeError
+  const content = context?.widget?.content || {
+    pageTitle: 'Study-Talk - Sign In',
+    heading: 'Welcome to Study-Talk',
+    description: 'Join the study revolution',
+    logoAlt: 'Study-Talk Logo'
+  };
+  
+  const flow = request?.route?.flow || 'login';
 
   const isLogin = flow === 'login';
   const isRegister = flow === 'register';
@@ -49,7 +57,7 @@ export default function Page({ event }: PageProps) {
   };
 
   return (
-    <html lang={request.locale.lang}>
+    <html lang={request?.locale?.lang || 'en'}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
