@@ -48,10 +48,70 @@ kinde-pages/
    - Connect your GitHub repository
    - Select this repository
 
-4. **Deploy**
+4. **Set Up Custom Domain**
+   - Go to Kinde dashboard → "Settings" → "Domains"
+   - Add custom domain: `auth.study-talk.com`
+   - Configure DNS records in Squarespace (see below)
+
+5. **Deploy**
    - Kinde will automatically detect the `kinde.json` file
    - The custom pages will replace Kinde's default authentication pages
    - Users will see the Study-Talk branded login/register pages
+
+## ⚠️ Important: Custom Domain Required
+
+**You will still see Kinde's default pages if you're using the default Kinde domain (`thanodi.kinde.com`).**
+
+To see your custom pages, you need to:
+
+### Setting Up Custom Domain with Squarespace
+
+1. **In Kinde Dashboard:**
+   - Go to "Settings" → "Domains"
+   - Add custom domain: `auth.study-talk.com`
+   - Copy the provided DNS records
+
+2. **In Squarespace:**
+   - Log into your Squarespace account
+   - Go to your `study-talk.com` domain settings
+   - Navigate to "DNS Settings"
+   - Add the CNAME record provided by Kinde:
+     ```
+     Type: CNAME
+     Name: auth
+     Value: thanodi.kinde.com
+     ```
+   - Save the changes
+
+3. **Wait for DNS Propagation:**
+   - DNS changes can take up to 24-48 hours to propagate
+   - SSL certificate will be automatically provisioned
+
+## Troubleshooting
+
+### Still seeing default pages?
+1. **Check if you're using the custom domain** - Custom pages only work on custom domains
+2. **Verify DNS configuration** - Ensure the CNAME record is correctly set in Squarespace
+3. **Wait for DNS propagation** - Changes can take up to 48 hours
+4. **Check SSL certificate** - Wait for automatic SSL provisioning
+5. **Clear browser cache** - Hard refresh the page (Ctrl+F5)
+
+### Custom pages not loading?
+1. **DNS Configuration** - Double-check the CNAME record in Squarespace
+2. **SSL Certificate** - Wait for SSL certificate to be provisioned (can take up to 24 hours)
+3. **Repository Updates** - Make sure the latest code is pushed to GitHub
+4. **Domain verification** - Ensure the domain is properly verified in Kinde
+
+## Environment Variables
+
+Update your environment variables to use the custom domain:
+
+```env
+KINDE_ISSUER_URL=https://auth.study-talk.com
+KINDE_SITE_URL="http://localhost:8080"
+KINDE_POST_LOGOUT_REDIRECT_URL="http://localhost:8080"
+KINDE_POST_LOGIN_REDIRECT_URL="http://localhost:8080/auth/callback"
+```
 
 ## Customization
 
@@ -63,19 +123,13 @@ The main customization file is `kindeSrc/environment/pages/(kinde)/(default)/pag
 - Shows feature cards on desktop
 - Is fully responsive
 
-## Environment Variables
-
-Make sure your Kinde environment has:
-- Google OAuth connection configured
-- Proper redirect URLs set up
-- Domain configuration completed
-
 ## Support
 
 For issues with the custom pages, check:
 1. Kinde dashboard for deployment status
 2. GitHub repository for code updates
 3. Kinde documentation for configuration options
+4. Squarespace DNS settings for domain configuration
 
 ---
 
