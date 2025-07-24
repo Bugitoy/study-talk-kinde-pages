@@ -1,9 +1,9 @@
 "use server";
 
+import { Widget } from "../../../../components/widget";
 import { type KindePageEvent } from "@kinde/infrastructure";
 import React from "react";
 import { renderToString } from "react-dom/server.browser";
-import { Widget } from "../../../../components/widget";
 import { DefaultLayout } from "../../../../layouts/default";
 import { Root } from "../../../../root";
 

@@ -10,7 +10,7 @@ import { Root } from "../../../../root";
 const DefaultPage: React.FC<KindePageEvent> = ({ context, request }) => {
   return (
     <Root context={context} request={request}>
-      <DefaultLayout>
+      <DefaultLayout isRegisterPage={true}>
         <Widget heading={context.widget.content.heading} />
       </DefaultLayout>
     </Root>
