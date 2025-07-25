@@ -9,6 +9,7 @@ import {
 } from "@kinde/infrastructure";
 import React from "react";
 import { getStyles } from "./styles/styles";
+
 interface RootProps extends KindePageEvent {
   children: React.ReactNode;
 }
@@ -27,12 +28,21 @@ export const Root = ({
         <meta content={getKindeCSRF()} name="csrf-token" />
         <meta content="light" name="color-scheme" />
         <meta content="nopagereadaloud" name="google" />
-        <title>{context.widget.content.page_title}</title>
+        <title>{context.widget.content.page_title || "Study-Talk - Sign In"}</title>
 
         <link href={getSVGFaviconUrl()} rel="icon" type="image/svg+xml" />
         {getKindeRequiredCSS()}
         {getKindeRequiredJS()}
         <style>{getStyles()}</style>
+        
+        {/* Add Google Fonts for better typography */}
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        
+        <style>{`
+          * {
+            font-family: 'Inter', sans-serif;
+          }
+        `}</style>
       </head>
 
       <body>

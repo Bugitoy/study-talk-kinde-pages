@@ -1,8 +1,6 @@
 "use server";
 
 import React from "react";
-import { Header } from "../components/header";
-import { Footer } from "../components/footer";
 
 type DefaultLayoutProps = {
   children: React.ReactNode;
@@ -13,12 +11,10 @@ const styles: {
   container: React.CSSProperties;
 } = {
   container: {
-    height: "100vh",
-    backgroundColor: "#FEF5ED",
-    color: "#184027",
+    minHeight: "100vh",
     display: "flex",
     justifyContent: "center",
-    flexDirection: "column",
+    alignItems: "center",
   },
 };
 
@@ -26,11 +22,7 @@ export const DefaultLayout = ({
   children,
   isRegisterPage = false,
 }: DefaultLayoutProps): React.JSX.Element => (
-  <div>
-    <main style={styles.container} id="main">
-      <Header page={isRegisterPage ? "register" : "login"} />
-      {children}
-      <Footer />
-    </main>
+  <div style={styles.container}>
+    {children}
   </div>
 );
